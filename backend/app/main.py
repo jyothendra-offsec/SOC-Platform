@@ -1,21 +1,11 @@
 from fastapi import FastAPI
 
+from app.api.router import api_router
+
 app = FastAPI(
-    title="SOC Platform",
+    title="Enterprise SOC Platform",
     description="Enterprise Security Operations Platform",
     version="0.1.0",
 )
 
-
-@app.get("/")
-def root():
-    return {
-        "message": "Welcome to the SOC Platform API"
-    }
-
-
-@app.get("/health")
-def health():
-    return {
-        "status": "healthy"
-    }
+app.include_router(api_router)
