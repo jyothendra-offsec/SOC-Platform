@@ -1,0 +1,48 @@
+# ==========================
+# Python
+# ==========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+.venv/
+venv/
+
+# Environment Variables
+.env
+
+# ==========================
+# VS Code
+# ==========================
+.vscode/
+
+# ==========================
+# JetBrains IDEs
+# ==========================
+.idea/
+
+# ==========================
+# Logs
+# ==========================
+*.log
+
+# ==========================
+# Testing
+# ==========================
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ==========================
+# Python Packaging
+# ==========================
+*.egg-info/
+dist/
+build/
+
+# ==========================
+# Operating System Files
+# ==========================
+.DS_Store
+Thumbs.db
