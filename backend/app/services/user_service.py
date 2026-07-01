@@ -3,7 +3,10 @@ from sqlalchemy.orm import Session
 
 from app.models.user import User
 from app.schemas.user import UserCreate
-from app.security.hashing import hash_password
+from app.security.hashing import (
+    hash_password,
+    verify_password,
+)
 
 
 def get_user_by_username(db: Session, username: str) -> User | None:
@@ -29,3 +32,19 @@ def create_user(db: Session, user: UserCreate) -> User:
     db.refresh(db_user)
 
     return db_user
+
+
+def authenticate_user(
+    db: Session,
+    username: str,
+    password: str,
+) -> User | None:
+    user = get_user_by_username(db, username)
+
+    if not user:
+        return None
+
+    if not verify_password(password, user.password_hash):
+        return None
+
+    return user
