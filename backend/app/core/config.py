@@ -11,6 +11,12 @@ class Settings(BaseSettings):
     host: str = "127.0.0.1"
     port: int = 8000
 
+    database_host: str = "localhost"
+    database_port: int = 5432
+    database_name: str = "soc_platform"
+    database_user: str = "soc_admin"
+    database_password: str = ""
+
     api_prefix: str = "/api/v1"
     log_level: str = "INFO"
 
@@ -18,6 +24,15 @@ class Settings(BaseSettings):
         env_file=".env",
         case_sensitive=False,
     )
+
+    @property
+    def database_url(self) -> str:
+        return (
+            f"postgresql+psycopg://"
+            f"{self.database_user}:{self.database_password}"
+            f"@{self.database_host}:{self.database_port}"
+            f"/{self.database_name}"
+        )
 
 
 settings = Settings()
