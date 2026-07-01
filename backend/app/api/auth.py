@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
 from app.db.dependencies import get_db
-from app.schemas.auth import LoginRequest, Token
+from app.schemas.auth import Token
 from app.schemas.user import UserCreate, UserResponse
 from app.security.jwt import create_access_token
 from app.services.user_service import (
@@ -47,13 +48,13 @@ def register(
     response_model=Token,
 )
 def login(
-    credentials: LoginRequest,
+    form_data: OAuth2PasswordRequestForm = Depends(),
     db: Session = Depends(get_db),
 ):
     user = authenticate_user(
         db=db,
-        username=credentials.username,
-        password=credentials.password,
+        username=form_data.username,
+        password=form_data.password,
     )
 
     if user is None:
