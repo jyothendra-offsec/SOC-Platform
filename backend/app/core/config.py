@@ -11,6 +11,9 @@ class Settings(BaseSettings):
     host: str = "127.0.0.1"
     port: int = 8000
 
+    api_prefix: str = "/api/v1"
+    log_level: str = "INFO"
+
     model_config = SettingsConfigDict(
         env_file=".env",
         case_sensitive=False,
